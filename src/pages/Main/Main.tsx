@@ -7,19 +7,20 @@ import {useState} from "react";
 export const Main = () => {
     const [value, setValue] = useState('')
     const dispatch = useDispatch()
-    const {data, isLoading, isFetching, isError, error} = useGetCommentsQuery()
+    const {data, isLoading} = useGetCommentsQuery()
 
     const clickHandler = () => {
         dispatch(setCommentAuthor('hello'))
     }
-    if(isLoading) {
-        return 'Loading...'
+
+    const handlerPopup = () => {
+        alert('popup')
     }
     return <>
         <Header value={value} setValue={setValue}/>
         <h1 onClick={clickHandler}>Main page</h1>
-        {!data ? 'Загрузка' : data.map(el => (
-            <div key={el.id}>
+        {isLoading ? 'Загрузка' : data?.map(el => (
+            <div onClick={handlerPopup} key={el.id}>
                 <div>{el.body}</div>
             </div>
         ))}
