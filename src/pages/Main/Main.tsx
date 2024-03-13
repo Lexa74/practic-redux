@@ -7,12 +7,14 @@ import {useState} from "react";
 export const Main = () => {
     const [value, setValue] = useState('')
     const dispatch = useDispatch()
-    const {data, isLoading} = useGetCommentsQuery()
+    const {data, isLoading, isFetching, isError, error} = useGetCommentsQuery()
 
     const clickHandler = () => {
         dispatch(setCommentAuthor('hello'))
     }
-
+    if(isLoading) {
+        return 'Loading...'
+    }
     const handlerPopup = () => {
         alert('popup')
     }
@@ -24,5 +26,11 @@ export const Main = () => {
                 <div>{el.body}</div>
             </div>
         ))}
+        <h1 onClick={clickHandler}>Заголовок</h1>
+        <div className="container">
+            <p>zagolovok</p>
+            <p>title</p>
+            <span>123123</span>
+        </div>
     </>
 }
